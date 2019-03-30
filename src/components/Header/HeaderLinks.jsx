@@ -7,6 +7,7 @@ import { Blockie } from "rimble-ui";
 import Web3 from "web3";
 import BlockierHeader from "components/Header/BlockieHeader.jsx";
 import tooltip from "assets/jss/material-kit-react/tooltipsStyle.jsx";
+import Icon from "@material-ui/core/Icon";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -27,6 +28,7 @@ function HeaderLinks({ ...props }) {
 
   return (
     <List className={classes.list}>
+
       {/* <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
