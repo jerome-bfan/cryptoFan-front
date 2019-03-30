@@ -24,16 +24,7 @@ class SectionWallet extends React.Component {
   render() {
     console.log("test1");
     console.log(web3.eth.defaultAccount);
-    web3.eth.getAccounts(accounts => console.log(accounts));
-    try {
-      web3.eth.getAccounts(function(err, accounts) {
-        
-        console.log(err);
-        console.log(accounts);
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    
     const { classes } = this.props;
     return (
       <div className={classes.section}>

@@ -2,6 +2,9 @@
 import React from "react";
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
+import { Blockie } from 'rimble-ui'
+import Web3 from "web3";
+import  BlockierHeader  from 'components/Header/BlockieHeader.jsx';
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -18,10 +21,13 @@ import Button from "components/CustomButtons/Button.jsx";
 
 import headerLinksStyle from "assets/jss/material-kit-react/components/headerLinksStyle.jsx";
 
+
 function HeaderLinks({ ...props }) {
   const { classes } = props;
+
   return (
     <List className={classes.list}>
+    
       {/* <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
@@ -88,6 +94,9 @@ function HeaderLinks({ ...props }) {
             <i className={classes.socialIcons + " fab fa-facebook"} />
           </Button>
         </Tooltip>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+      <BlockierHeader/>
       </ListItem>
       <ListItem className={classes.listItem}>
         <Tooltip
