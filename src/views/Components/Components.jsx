@@ -5,6 +5,8 @@ import classNames from "classnames";
 import { Link } from "react-router-dom";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
+import Icon from "@material-ui/core/Icon";
+
 // @material-ui/icons
 // core components
 import Header from "components/Header/Header.jsx";
@@ -53,10 +55,10 @@ class Components extends React.Component {
             <GridContainer>
               <GridItem>
                 <div className={classes.brand}>
-                  <h1 className={classes.title}>CryptoFan</h1>
-                  <h3 className={classes.subtitle}>
-                    A Badass Material-UI Kit based on Material Design.
-                  </h3>
+                  <h1 className={classes.title}>345 <Icon>
+                  currency_usd_off
+                  </Icon></h1>
+                  <h3 className={classes.subtitle}>or 35€ </h3>
                 </div>
               </GridItem>
             </GridContainer>
