@@ -22,6 +22,8 @@ const web3 = new Web3(Web3.givenProvider || "wss://ropsten.eth.6120.eu/ws");
 
 class SectionWallet extends React.Component {
   render() {
+    console.log("test1");
+    console.log(web3.eth.defaultAccount);
     web3.eth.getAccounts(accounts => console.log(accounts));
     try {
       web3.eth.getAccounts(function(err, accounts) {
