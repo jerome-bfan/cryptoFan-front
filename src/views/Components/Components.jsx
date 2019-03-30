@@ -29,6 +29,7 @@ import SectionExamples from "./Sections/SectionExamples.jsx";
 import SectionDownload from "./Sections/SectionDownload.jsx";
 
 import componentsStyle from "assets/jss/material-kit-react/views/components.jsx";
+import SectionAccueil from "./Sections/SectionAccueil.jsx";
 
 class Components extends React.Component {
   render() {
@@ -36,7 +37,7 @@ class Components extends React.Component {
     return (
       <div>
         <Header
-          brand="Material Kit React"
+          brand="CryptoFan"
           rightLinks={<HeaderLinks />}
           fixed
           color="transparent"
@@ -51,7 +52,7 @@ class Components extends React.Component {
             <GridContainer>
               <GridItem>
                 <div className={classes.brand}>
-                  <h1 className={classes.title}>Material Kit React.</h1>
+                  <h1 className={classes.title}>CryptoFan</h1>
                   <h3 className={classes.subtitle}>
                     A Badass Material-UI Kit based on Material Design.
                   </h3>
@@ -80,6 +81,7 @@ class Components extends React.Component {
             </Link>
           </GridItem> */}
           {/* <SectionExamples /> */}
+          <SectionAccueil />
           <SectionDownload />
         </div>
         <Footer />
