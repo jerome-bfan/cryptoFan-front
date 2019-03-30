@@ -15,6 +15,7 @@ import Drawer from "@material-ui/core/Drawer";
 import Menu from "@material-ui/icons/Menu";
 import Web3 from "web3";
 import { Blockie } from "rimble-ui";
+import { Tooltip } from 'rimble-ui'
 
 // core components
 import headerStyle from "assets/jss/material-kit-react/components/headerStyle.jsx";
@@ -27,9 +28,8 @@ class BlockieHeader extends React.Component {
       mobileOpen: false
     };
     this.getAccount().then(e => {
-      console.log(e)
-      this.setState({ account: e })
-
+      console.log(e);
+      this.setState({ account: e });
     });
     this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
     this.headerColorChange = this.headerColorChange.bind(this);
@@ -62,11 +62,10 @@ class BlockieHeader extends React.Component {
         .classList.remove(classes[changeColorOnScroll.color]);
     }
   }
-  async getAccount() {
-   return web3.eth.getAccounts(function(err, accounts) {
-     return accounts
+  getAccount() {
+    return web3.eth.getAccounts(function(err, accounts) {
+      return accounts;
     });
-
   }
   componentWillUnmount() {
     if (this.props.changeColorOnScroll) {
@@ -78,16 +77,17 @@ class BlockieHeader extends React.Component {
 
     return (
       <div>
-        {this.state.account}{" "}
-        <Blockie
-          opts={{
-            seed: this.state.account,
-            color: "#dfe",
-            size: 15,
-            scale: 3,
-            spotcolor: "#000"
-          }}
-        />
+        <Tooltip variant="dark" message={this.state.account[0]} placement="top">
+          <Blockie
+            opts={{
+              seed: this.state.account,
+              color: "#dfe",
+              size: 15,
+              scale: 3,
+              spotcolor: "#000"
+            }}
+          />
+        </Tooltip>
       </div>
     );
   }

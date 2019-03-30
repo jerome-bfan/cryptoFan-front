@@ -1,16 +1,17 @@
 /*eslint-disable*/
+import { Tooltip } from "rimble-ui";
 import React from "react";
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
-import { Blockie } from 'rimble-ui'
+import { Blockie } from "rimble-ui";
 import Web3 from "web3";
-import  BlockierHeader  from 'components/Header/BlockieHeader.jsx';
+import BlockierHeader from "components/Header/BlockieHeader.jsx";
+import tooltip from "assets/jss/material-kit-react/tooltipsStyle.jsx";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Tooltip from "@material-ui/core/Tooltip";
 
 // @material-ui/icons
 import { Apps, CloudDownload } from "@material-ui/icons";
@@ -21,13 +22,11 @@ import Button from "components/CustomButtons/Button.jsx";
 
 import headerLinksStyle from "assets/jss/material-kit-react/components/headerLinksStyle.jsx";
 
-
 function HeaderLinks({ ...props }) {
   const { classes } = props;
 
   return (
     <List className={classes.list}>
-    
       {/* <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
@@ -78,43 +77,11 @@ function HeaderLinks({ ...props }) {
           </Button>
         </Tooltip>
       </ListItem> */}
+      <ListItem className={classes.listItem} />
       <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-facebook"
-          title="Follow us on facebook"
-          placement={window.innerWidth > 959 ? "top" : "left"}
-          classes={{ tooltip: classes.tooltip }}
-        >
-          <Button
-            color="transparent"
-            href="https://www.facebook.com/CreativeTim"
-            target="_blank"
-            className={classes.navLink}
-          >
-            <i className={classes.socialIcons + " fab fa-facebook"} />
-          </Button>
-        </Tooltip>
+        <BlockierHeader />
       </ListItem>
-      <ListItem className={classes.listItem}>
-      <BlockierHeader/>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Tooltip
-          id="instagram-tooltip"
-          title="Follow us on instagram"
-          placement={window.innerWidth > 959 ? "top" : "left"}
-          classes={{ tooltip: classes.tooltip }}
-        >
-          <Button
-            color="transparent"
-            href="https://www.instagram.com/CreativeTimOfficial"
-            target="_blank"
-            className={classes.navLink}
-          >
-            <i className={classes.socialIcons + " fab fa-instagram"} />
-          </Button>
-        </Tooltip>
-      </ListItem>
+      <ListItem className={classes.listItem} />
     </List>
   );
 }
