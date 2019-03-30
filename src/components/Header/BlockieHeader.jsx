@@ -18,10 +18,12 @@ import Icon from "@material-ui/core/Icon";
 import Web3 from "web3";
 import { Blockie } from "rimble-ui";
 import { Tooltip } from "rimble-ui";
+import { abi } from './RainbowToken.json';
 
 // core components
 import headerStyle from "assets/jss/material-kit-react/components/headerStyle.jsx";
-const web3 = new Web3(Web3.givenProvider || "wss://ropsten.eth.6120.eu/ws");
+export const web3 = new Web3(Web3.givenProvider || "wss://ropsten.eth.6120.eu/ws");
+
 class BlockieHeader extends React.Component {
   constructor(props) {
     super(props);
@@ -33,8 +35,9 @@ class BlockieHeader extends React.Component {
     this.getAccount().then(e => {
       console.log(e);
       this.setState({ account: e });
+     console.log(this.newContract(e))
+
       this.getBalance(e).then(e => {
-        console.log(); //Will give value in.
 
         this.setState({ balance: web3.utils.fromWei(e, "ether") });
 
@@ -42,40 +45,20 @@ class BlockieHeader extends React.Component {
       });
     });
     this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
-    this.headerColorChange = this.headerColorChange.bind(this);
   }
   handleDrawerToggle() {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   }
   componentWillMount() {
-    if (this.props.changeColorOnScroll) {
-      window.addEventListener("scroll", this.headerColorChange);
-    }
+   
   }
-  headerColorChange() {
-    const { classes, color, changeColorOnScroll } = this.props;
-    const windowsScrollTop = window.pageYOffset;
-    if (windowsScrollTop > changeColorOnScroll.height) {
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.remove(classes[color]);
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.add(classes[changeColorOnScroll.color]);
-    } else {
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.add(classes[color]);
-      document.body
-        .getElementsByTagName("header")[0]
-        .classList.remove(classes[changeColorOnScroll.color]);
-    }
-  }
+
   getAccount() {
     return web3.eth.getAccounts(function(err, accounts) {
       return accounts;
     });
   }
+
   getBalance(address) {
     var balance = web3.eth.getBalance(address[0]);
     return balance.then(e => {
@@ -83,10 +66,13 @@ class BlockieHeader extends React.Component {
     });
   }
 
+  newContract(address) {
+    var balance = new web3.eth.Contract(abi, address[0]);
+    return balance
+  }
+
   componentWillUnmount() {
-    if (this.props.changeColorOnScroll) {
-      window.removeEventListener("scroll", this.headerColorChange);
-    }
+ 
   }
   render() {
     console.log(this.state.account[0]);
@@ -104,7 +90,7 @@ class BlockieHeader extends React.Component {
             }}
           />
         </Tooltip>
-        <Tooltip variant="dark" message={"Balance :" + this.state.balance} placement="top">
+        <Tooltip variant="dark" message={"Balance " + this.state.balance} placement="top">
           <Icon size={20} style={{ marginLeft: 20 }}>
             trending_up
           </Icon>
