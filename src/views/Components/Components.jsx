@@ -30,6 +30,7 @@ import SectionDownload from "./Sections/SectionDownload.jsx";
 
 import componentsStyle from "assets/jss/material-kit-react/views/components.jsx";
 import SectionAccueil from "./Sections/SectionAccueil.jsx";
+import SectionWallet from "./Sections/SectionWallet.jsx";
 
 class Components extends React.Component {
   render() {
@@ -82,6 +83,7 @@ class Components extends React.Component {
           </GridItem> */}
           {/* <SectionExamples /> */}
           <SectionAccueil />
+          <SectionWallet />
           <SectionDownload />
         </div>
         <Footer />
