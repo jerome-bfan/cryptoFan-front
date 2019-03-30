@@ -68,7 +68,7 @@ function Footer({ ...props }) {
           &copy; {1900 + new Date().getYear()} , made
            by{" "}
           <a
-            href="https://www.creative-tim.com"
+            href="http://www.bfansports.com/"
             className={aClasses}
             target="_blank"
           >
