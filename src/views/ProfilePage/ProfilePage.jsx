@@ -15,6 +15,7 @@ import GridItem from "components/Grid/GridItem.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import NavPills from "components/NavPills/NavPills.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
+import { Modal, Card, TextButton, Box, Flex, OutlineButton } from "rimble-ui";
 
 import profile from "assets/img/faces/christian.jpg";
 
@@ -50,11 +51,30 @@ const qte = 41;
 const bank_address = "0xd3E3d958bABCf2Eb378Af2ED5DE42359ac2F09E3";
 const club_address = "0x36dF643699515a19e43f8ccF857B14B05411A88a";
 const user_address = "0x6eA5caCB70E86F2f07ff5171C7D539Ccb982aB36";
+const contract_address = "0xe5E1dC38e28990773A10dff537dD23BAfe569eD3"
+
 class ProfilePage extends React.Component {
+  closeModal = e => {
+    e.preventDefault();
+    this.setState((state, props) => ({
+      isOpen: false
+    }));
+  };
+
+  openModal = e => {
+    e.preventDefault();
+    this.setState((state, props) => ({
+      isOpen: true
+    }));
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       account: "",
+      isOpen: false,
+      price: "",
+      viewModal:false,
       tokenBank: ""
     };
     this.getAccount().then(e => {
@@ -74,6 +94,7 @@ class ProfilePage extends React.Component {
       console.log("easy");
     });
   }
+
   async getBalanceBank(address) {
     var contract = new web3.eth.Contract(
       abi,
@@ -113,8 +134,8 @@ class ProfilePage extends React.Component {
         return receipt;
       });
   }
-  
-   transferForm(address) {
+
+  transferForm(address) {
     var contract = new web3.eth.Contract(
       abi,
       "0x36dF643699515a19e43f8ccF857B14B05411A88a"
@@ -127,6 +148,14 @@ class ProfilePage extends React.Component {
       return accounts;
     });
   }
+  transferFormS(address) {
+    var contract = new web3.eth.Contract(
+      abi,
+      contract_address
+    );
+    contract.methods.transfer(club_address, 41).send({ from: user_address });
+  }
+
   render() {
     const { classes, ...rest } = this.props;
     const imageClasses = classNames(
@@ -140,11 +169,17 @@ class ProfilePage extends React.Component {
       classes.imgFluid
     );
     const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-    const imageClick = (price) => {
-      console.log('Click');
-    } 
+    const imageClick = price => {
+      if (!! price ) {
+      console.log(price);
+      this.transferFormS();
+      this.setState((state, props) => ({
+        price: price
+      }));
+      }
+    };
+
     return (
-      
       <div>
         <Header
           color="transparent"
@@ -154,6 +189,7 @@ class ProfilePage extends React.Component {
         />
 
         <Parallax small filter image={require("assets/img/header_sf2.jpg")} />
+      
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div>
             <div className={classes.container}>
@@ -163,7 +199,7 @@ class ProfilePage extends React.Component {
                     <div>
                       <div id="tokens" className={tokenClasses}>
                         <h2 className={classes.tokenValue}>
-                          {this.state.tokenUser/10**18}
+                          {this.state.tokenUser / 10 ** 18}
                         </h2>
                         <img src={tokenLogo} className={classes.tokenLogo} />
                       </div>
@@ -176,7 +212,9 @@ class ProfilePage extends React.Component {
                   Engagez vous auprès de la FFF et de ses clubs pour bénéficier
                   de récompenses et d'experiences uniques
                 </h5>
+              
               </div>
+            
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
                   <NavPills
@@ -191,14 +229,14 @@ class ProfilePage extends React.Component {
                             <GridItem xs={12} sm={12} md={4}>
                               <img
                                 alt="..."
-                                onClick={() => imageClick("11")}
+                                onClick={() => imageClick(15 * 10 ** 18)}
                                 src={checkin}
                                 className={navImageClasses}
                               />
                               <img
                                 alt="..."
                                 src={licence}
-                                onClick={() => imageClick()}
+                                onClick={() => imageClick(250 * 10 ** 18)}
                                 className={navImageClasses}
                               />
                               <img
