@@ -33,15 +33,12 @@ class BlockieHeader extends React.Component {
       mobileOpen: false
     };
     this.getAccount().then(e => {
-      console.log(e);
       this.setState({ account: e });
-     console.log(this.newContract(e))
 
       this.getBalance(e).then(e => {
 
         this.setState({ balance: web3.utils.fromWei(e, "ether") });
 
-        console.log(e);
       });
     });
     this.handleDrawerToggle = this.handleDrawerToggle.bind(this);

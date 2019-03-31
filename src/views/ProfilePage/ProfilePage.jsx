@@ -31,7 +31,6 @@ import work3 from "assets/img/examples/cynthia-del-rio.jpg";
 import work4 from "assets/img/examples/mariya-georgieva.jpg";
 import work5 from "assets/img/examples/clem-onojegaw.jpg";
 
-
 import arbitre from "assets/img/examples/arbitre.jpg";
 import mvp from "assets/img/examples/mvp.jpg";
 import checkin from "assets/img/examples/checkin.jpg";
@@ -41,8 +40,58 @@ import training from "assets/img/examples/training.jpg";
 import reward from "assets/img/examples/reward.jpg";
 
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
+import Web3 from "web3";
+import { abi } from "components/Header/RainbowToken.json";
+
+export const web3 = new Web3(window.web3.currentProvider);
 
 class ProfilePage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      account: "",
+      tokenUser: ""
+    };
+    this.getAccount().then(e => {
+      console.log(e);
+      this.setState({ account: e });
+      console.log(this.newContract(e));
+      this.newContract("dd").then(e => {
+        console.log("test");
+
+        console.log(e);
+        this.setState({ tokenUser: e });
+
+        console.log("test");
+      });
+
+      console.log("easy");
+    });
+  }
+  async newContract(address) {
+    var contract = new web3.eth.Contract(
+      abi,
+      "0x92325673E1d4B0997F489fF11770d86D151D2d07"
+    );
+    return contract.methods
+      .balanceOf("0x3cb471fe894fFBbAB491624A3fD7C3D854C716c1")
+      .call(
+        { from: "0x92325673E1d4B0997F489fF11770d86D151D2d07" },
+        (error, result) => {
+          console.log(result);
+        }
+      )
+      .then(receipt => {
+        console.log(web3.utils.hexToNumber(receipt));
+        return web3.utils.hexToNumber(receipt);
+      });
+  }
+
+  getAccount() {
+    return web3.eth.getAccounts(function(err, accounts) {
+      return accounts;
+    });
+  }
   render() {
     const { classes, ...rest } = this.props;
     const imageClasses = classNames(
@@ -74,8 +123,8 @@ class ProfilePage extends React.Component {
                   <div className={classes.profile}>
                     <div>
                       <div id="tokens" className={tokenClasses}>
-                        <h2 className={classes.tokenValue}>43.33</h2>
-                        <img src={tokenLogo} className={classes.tokenLogo}/>
+                        <h2 className={classes.tokenValue}>{this.state.tokenUser}</h2>
+                        <img src={tokenLogo} className={classes.tokenLogo} />
                       </div>
                     </div>
                   </div>
@@ -83,7 +132,8 @@ class ProfilePage extends React.Component {
               </GridContainer>
               <div className={classes.description}>
                 <h5>
-                  Engagez vous auprès de la FFF et de ses clubs pour bénéficier de récompenses et d'experiences uniques
+                  Engagez vous auprès de la FFF et de ses clubs pour bénéficier
+                  de récompenses et d'experiences uniques
                 </h5>
               </div>
               <GridContainer justify="center">
