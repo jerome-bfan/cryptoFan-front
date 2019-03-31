@@ -31,8 +31,10 @@ const CryptoFanTest = new web3ws.eth.Contract(abi, contractAddress);
 // 	console.log(receipt)
 // });
 
-var temp = CryptoFanTest.methods.balanceOf('0x3cb471fe894fFBbAB491624A3fD7C3D854C716c1').call({from : '0x3cb471fe894fFBbAB491624A3fD7C3D854C716c1'},(error, result) => {console.log(result)}).then(console.log);
-console.log(temp)
+CryptoFanTest.methods.balanceOf('0x3cb471fe894fFBbAB491624A3fD7C3D854C716c1').call({from : '0x3cb471fe894fFBbAB491624A3fD7C3D854C716c1'},(error, result) => {console.log(result)}).then((receipt) => {
+    console.log(web3ws.utils.hexToNumber(receipt))
+});
+
 
 // Coursetro.getInstructor(function(error, result){
 //     if(!error)
