@@ -49,7 +49,7 @@ import { abi } from "components/Header/RainbowToken.json";
 export const web3 = new Web3(window.web3.currentProvider);
 const qte = 41;
 const bank_address = "0xd3E3d958bABCf2Eb378Af2ED5DE42359ac2F09E3";
-const club_address = "0x36dF643699515a19e43f8ccF857B14B05411A88a";
+const club_address = "0x3cb471fe894fFBbAB491624A3fD7C3D854C716c1";
 const user_address = "0x6eA5caCB70E86F2f07ff5171C7D539Ccb982aB36";
 const contract_address = "0xe5E1dC38e28990773A10dff537dD23BAfe569eD3"
 
@@ -98,7 +98,7 @@ class ProfilePage extends React.Component {
   async getBalanceBank(address) {
     var contract = new web3.eth.Contract(
       abi,
-      "0x36dF643699515a19e43f8ccF857B14B05411A88a"
+      "0xe5E1dC38e28990773A10dff537dD23BAfe569eD3"
     );
     return contract.methods
       .balanceOf(bank_address)
@@ -118,7 +118,7 @@ class ProfilePage extends React.Component {
   async getBalanceUser(address) {
     var contract = new web3.eth.Contract(
       abi,
-      "0x36dF643699515a19e43f8ccF857B14B05411A88a"
+      "0xe5E1dC38e28990773A10dff537dD23BAfe569eD3"
     );
     return contract.methods
       .balanceOf(user_address)
@@ -138,7 +138,7 @@ class ProfilePage extends React.Component {
   transferForm(address) {
     var contract = new web3.eth.Contract(
       abi,
-      "0x36dF643699515a19e43f8ccF857B14B05411A88a"
+      "0xe5E1dC38e28990773A10dff537dD23BAfe569eD3"
     );
     contract.methods.transferFrom(bank_address, user_address, 41).call();
   }
@@ -153,7 +153,7 @@ class ProfilePage extends React.Component {
       abi,
       contract_address
     );
-    contract.methods.transfer(club_address, 41).send({ from: user_address });
+    contract.methods.transfer(address, 41).send({ from: address });
   }
 
   render() {
@@ -169,10 +169,10 @@ class ProfilePage extends React.Component {
       classes.imgFluid
     );
     const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-    const imageClick = price => {
+    const imageClick = (price, address) => {
       if (!! price ) {
       console.log(price);
-      this.transferFormS();
+      this.transferFormS(address);
       this.setState((state, props) => ({
         price: price
       }));
@@ -199,7 +199,7 @@ class ProfilePage extends React.Component {
                     <div>
                       <div id="tokens" className={tokenClasses}>
                         <h2 className={classes.tokenValue}>
-                          {this.state.tokenUser / 10 ** 18}
+                          {this.state.tokenUser}
                         </h2>
                         <img src={tokenLogo} className={classes.tokenLogo} />
                       </div>
@@ -229,14 +229,14 @@ class ProfilePage extends React.Component {
                             <GridItem xs={12} sm={12} md={4}>
                               <img
                                 alt="..."
-                                onClick={() => imageClick(15 * 10 ** 18)}
+                                onClick={() => imageClick(15,user_address)}
                                 src={checkin}
                                 className={navImageClasses}
                               />
                               <img
                                 alt="..."
                                 src={licence}
-                                onClick={() => imageClick(250 * 10 ** 18)}
+                                onClick={() => imageClick(250,user_address)}
                                 className={navImageClasses}
                               />
                               <img
@@ -269,11 +269,13 @@ class ProfilePage extends React.Component {
                               <img
                                 alt="..."
                                 src={ucpa}
+                                onClick={() => imageClick(250,club_address)}
                                 className={navImageClasses}
                               />
                               <img
                                 alt="..."
                                 src={training}
+                                onClick={() => imageClick(250,club_address)}
                                 className={navImageClasses}
                               />
                               <img
