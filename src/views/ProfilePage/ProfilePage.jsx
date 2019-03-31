@@ -140,7 +140,11 @@ class ProfilePage extends React.Component {
       classes.imgFluid
     );
     const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+    const imageClick = (price) => {
+      console.log('Click');
+    } 
     return (
+      
       <div>
         <Header
           color="transparent"
@@ -187,12 +191,14 @@ class ProfilePage extends React.Component {
                             <GridItem xs={12} sm={12} md={4}>
                               <img
                                 alt="..."
+                                onClick={() => imageClick("11")}
                                 src={checkin}
                                 className={navImageClasses}
                               />
                               <img
                                 alt="..."
                                 src={licence}
+                                onClick={() => imageClick()}
                                 className={navImageClasses}
                               />
                               <img
