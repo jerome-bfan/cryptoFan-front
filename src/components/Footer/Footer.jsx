@@ -28,34 +28,16 @@ function Footer({ ...props }) {
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/"
+                href="https://www.fff.fr/actualites/182229-la-fff-lance-ses-trophees-de-l-innovation"
                 className={classes.block}
                 target="_blank"
               >
-                Creative Tim
+                A Propos
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/presentation"
-                className={classes.block}
-                target="_blank"
-              >
-                About us
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="http://blog.creative-tim.com/"
-                className={classes.block}
-                target="_blank"
-              >
-                Blog
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/license"
+                href="https://www.fff.fr/actualites/182229-la-fff-lance-ses-trophees-de-l-innovation"
                 className={classes.block}
                 target="_blank"
               >
@@ -65,8 +47,8 @@ function Footer({ ...props }) {
           </List>
         </div>
         <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} , made
-           by{" "}
+          &copy; {1900 + new Date().getYear()} , FFF &
+           {" "}
           <a
             href="http://www.bfansports.com/"
             className={aClasses}
@@ -74,7 +56,6 @@ function Footer({ ...props }) {
           >
            CryptoFan
           </a>{" "}
-          for a better blockchain.
         </div>
       </div>
     </footer>
