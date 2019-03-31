@@ -38,6 +38,8 @@ import adidas from "assets/img/examples/adidas.jpg";
 import licence from "assets/img/examples/licence.jpg";
 import training from "assets/img/examples/training.jpg";
 import reward from "assets/img/examples/reward.jpg";
+import voir_match from "assets/img/examples/voir_match.jpg";
+import ucpa from "assets/img/examples/ucpa.jpg";
 
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePage.jsx";
 import Web3 from "web3";
@@ -150,17 +152,22 @@ class ProfilePage extends React.Component {
                             <GridItem xs={12} sm={12} md={4}>
                               <img
                                 alt="..."
-                                src={mvp}
-                                className={navImageClasses}
-                              />
-                              <img
-                                alt="..."
                                 src={checkin}
                                 className={navImageClasses}
                               />
                               <img
                                 alt="..."
                                 src={licence}
+                                className={navImageClasses}
+                              />
+                              <img
+                                alt="..."
+                                src={voir_match}
+                                className={navImageClasses}
+                              />
+                              <img
+                                alt="..."
+                                src={mvp}
                                 className={navImageClasses}
                               />
                             </GridItem>
@@ -182,7 +189,7 @@ class ProfilePage extends React.Component {
                             <GridItem xs={12} sm={12} md={12}>
                               <img
                                 alt="..."
-                                src={adidas}
+                                src={ucpa}
                                 className={navImageClasses}
                               />
                               <img
@@ -192,7 +199,7 @@ class ProfilePage extends React.Component {
                               />
                               <img
                                 alt="..."
-                                src={reward}
+                                src={adidas}
                                 className={navImageClasses}
                               />
                             </GridItem>
