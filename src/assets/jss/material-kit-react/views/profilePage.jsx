@@ -2,16 +2,26 @@ import { container, title } from "assets/jss/material-kit-react.jsx";
 
 import imagesStyle from "assets/jss/material-kit-react/imagesStyles.jsx";
 
+import tokenStyles from "assets/jss/material-kit-react/tokenStyles.jsx";
+
 const profilePageStyle = {
   container,
   profile: {
     textAlign: "center",
-    "& img": {
-      maxWidth: "160px",
+    "& #tokens": {
+      maxWidth: "110px",
       width: "100%",
       margin: "0 auto",
-      transform: "translate3d(0, -50%, 0)"
-    }
+      transform: "translate3d(0, -50%, 0)",
+      backgroundColor: '#000000',
+      background: 'linear-gradient(rgba(0, 82, 206, 0.52),transparent);',
+      display: 'inline-block',
+      padding: "14px 0"
+    },
+    "& h2": {
+      color: 'white',
+      margin: "0"
+    },
   },
   description: {
     margin: "1.071rem auto 0",
