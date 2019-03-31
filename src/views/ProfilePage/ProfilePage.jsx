@@ -47,7 +47,7 @@ import { abi } from "components/Header/RainbowToken.json";
 
 export const web3 = new Web3(window.web3.currentProvider);
 const qte = 41;
-const club_address = "0x4e8DD0195e388c2ACcccbe1BC5A06791BCF49291";
+const bank_address = "0xd3E3d958bABCf2Eb378Af2ED5DE42359ac2F09E3";
 const user_address = "0x6eA5caCB70E86F2f07ff5171C7D539Ccb982aB36";
 class ProfilePage extends React.Component {
   constructor(props) {
@@ -75,7 +75,7 @@ class ProfilePage extends React.Component {
       "0x36dF643699515a19e43f8ccF857B14B05411A88a"
     );
     return contract.methods
-      .balanceOf(club_address)
+      .balanceOf(bank_address)
       .call(
         { from: "0x92325673E1d4B0997F489fF11770d86D151D2d07" },
         (error, result) => {
@@ -83,8 +83,9 @@ class ProfilePage extends React.Component {
         }
       )
       .then(receipt => {
-        //console.log(web3.utils.hexToNumber(receipt));
-        return web3.utils.hexToNumber(receipt);
+        console.log(receipt);
+        console.log("testss");
+        return receipt;
       });
   }
    transferForm(address) {
@@ -92,7 +93,7 @@ class ProfilePage extends React.Component {
       abi,
       "0x36dF643699515a19e43f8ccF857B14B05411A88a"
     );
-    contract.methods.transferFrom(club_address, user_address, qte).call();
+    contract.methods.transferFrom(bank_address, user_address, 41).call();
   }
 
   getAccount() {
