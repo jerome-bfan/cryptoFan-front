@@ -46,7 +46,9 @@ import Web3 from "web3";
 import { abi } from "components/Header/RainbowToken.json";
 
 export const web3 = new Web3(window.web3.currentProvider);
-
+const qte = 41;
+const club_address = "0x4e8DD0195e388c2ACcccbe1BC5A06791BCF49291";
+const user_address = "0x6eA5caCB70E86F2f07ff5171C7D539Ccb982aB36";
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
@@ -59,13 +61,10 @@ class ProfilePage extends React.Component {
       this.setState({ account: e });
       console.log(this.newContract(e));
       this.newContract("dd").then(e => {
-        console.log("test");
-
         console.log(e);
         this.setState({ tokenUser: e });
-
-        console.log("test");
       });
+      this.transferForm("dd");
 
       console.log("easy");
     });
@@ -73,10 +72,10 @@ class ProfilePage extends React.Component {
   async newContract(address) {
     var contract = new web3.eth.Contract(
       abi,
-      "0x92325673E1d4B0997F489fF11770d86D151D2d07"
+      "0x36dF643699515a19e43f8ccF857B14B05411A88a"
     );
     return contract.methods
-      .balanceOf("0x3cb471fe894fFBbAB491624A3fD7C3D854C716c1")
+      .balanceOf(club_address)
       .call(
         { from: "0x92325673E1d4B0997F489fF11770d86D151D2d07" },
         (error, result) => {
@@ -84,9 +83,16 @@ class ProfilePage extends React.Component {
         }
       )
       .then(receipt => {
-        console.log(web3.utils.hexToNumber(receipt));
+        //console.log(web3.utils.hexToNumber(receipt));
         return web3.utils.hexToNumber(receipt);
       });
+  }
+   transferForm(address) {
+    var contract = new web3.eth.Contract(
+      abi,
+      "0x36dF643699515a19e43f8ccF857B14B05411A88a"
+    );
+    contract.methods.transferFrom(club_address, user_address, qte).call();
   }
 
   getAccount() {
@@ -125,7 +131,9 @@ class ProfilePage extends React.Component {
                   <div className={classes.profile}>
                     <div>
                       <div id="tokens" className={tokenClasses}>
-                        <h2 className={classes.tokenValue}>{this.state.tokenUser}</h2>
+                        <h2 className={classes.tokenValue}>
+                          {this.state.tokenUser}
+                        </h2>
                         <img src={tokenLogo} className={classes.tokenLogo} />
                       </div>
                     </div>
