@@ -18,12 +18,14 @@ import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 
 import { Modal, Row, Col } from "react-bootstrap";
-const web3 = new Web3(Web3.givenProvider || "wss://ropsten.eth.6120.eu/ws");
+import { CryptoFanWs } from 'index.js';
+
+
 
 class SectionWallet extends React.Component {
   render() {
     console.log("test1");
-    console.log(web3.eth.defaultAccount);
+    // console.log(CryptoFanWs.methods.balanceOf());
     
     const { classes } = this.props;
     return (
