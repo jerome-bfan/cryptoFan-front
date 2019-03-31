@@ -48,20 +48,25 @@ import { abi } from "components/Header/RainbowToken.json";
 export const web3 = new Web3(window.web3.currentProvider);
 const qte = 41;
 const bank_address = "0xd3E3d958bABCf2Eb378Af2ED5DE42359ac2F09E3";
+const club_address = "0x36dF643699515a19e43f8ccF857B14B05411A88a";
 const user_address = "0x6eA5caCB70E86F2f07ff5171C7D539Ccb982aB36";
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       account: "",
-      tokenUser: ""
+      tokenBank: ""
     };
     this.getAccount().then(e => {
       console.log(e);
       this.setState({ account: e });
-      console.log(this.newContract(e));
-      this.newContract("dd").then(e => {
+      this.getBalanceBank("dd").then(e => {
         console.log(e);
+        this.setState({ tokenBank: e });
+      });
+      this.getBalanceUser("dd").then(e => {
+        console.log(e);
+        console.log("fuck");
         this.setState({ tokenUser: e });
       });
       this.transferForm("dd");
@@ -69,7 +74,7 @@ class ProfilePage extends React.Component {
       console.log("easy");
     });
   }
-  async newContract(address) {
+  async getBalanceBank(address) {
     var contract = new web3.eth.Contract(
       abi,
       "0x36dF643699515a19e43f8ccF857B14B05411A88a"
@@ -88,6 +93,27 @@ class ProfilePage extends React.Component {
         return receipt;
       });
   }
+
+  async getBalanceUser(address) {
+    var contract = new web3.eth.Contract(
+      abi,
+      "0x36dF643699515a19e43f8ccF857B14B05411A88a"
+    );
+    return contract.methods
+      .balanceOf(user_address)
+      .call(
+        { from: "0x92325673E1d4B0997F489fF11770d86D151D2d07" },
+        (error, result) => {
+          console.log(result);
+        }
+      )
+      .then(receipt => {
+        console.log(receipt);
+        console.log("testss");
+        return receipt;
+      });
+  }
+  
    transferForm(address) {
     var contract = new web3.eth.Contract(
       abi,
@@ -133,7 +159,7 @@ class ProfilePage extends React.Component {
                     <div>
                       <div id="tokens" className={tokenClasses}>
                         <h2 className={classes.tokenValue}>
-                          {this.state.tokenUser}
+                          {this.state.tokenUser/10**18}
                         </h2>
                         <img src={tokenLogo} className={classes.tokenLogo} />
                       </div>
